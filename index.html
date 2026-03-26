@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om Akhatkar - Entrepreneur & Digital Creator</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Configuration & Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        gray: { 300: '#d1d5db', 400: '#9ca3af', 500: '#6b7280' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #050505; 
+            color: white; 
+            overflow-x: hidden; 
+        }
+        html { scroll-behavior: smooth; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #fff; border-radius: 10px; }
+        
+        /* Liquid Background Animations */
+        .bg-shape { transition: transform 0.1s ease-out; }
+        
+        /* 3D Tilt Card */
+        .tilt-card { 
+            transition: transform 0.1s ease-out; 
+            transform-style: preserve-3d; 
+        }
+        .tilt-content { transform: translateZ(30px); }
+        
+        /* Scroll Reveal Animation */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        /* 3D Text Effect */
+        .text-3d { transform-style: preserve-3d; }
+        .text-3d-inner { transform: translateZ(30px); display: inline-block; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black pb-20 md:pb-0">
+
+    <!-- Liquid Glass Background -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <!-- Noise Texture -->
+        <div class="absolute inset-0 opacity-[0.03] mix-blend-overlay z-10" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')"></div>
+        
+        <!-- Animated Blobs -->
+        <div class="absolute inset-0 opacity-80">
+            <div id="bg1" class="bg-shape absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-white/20 blur-[100px] mix-blend-screen"></div>
+            <div id="bg2" class="bg-shape absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-gray-400/20 blur-[90px] mix-blend-screen"></div>
+            <div id="bg3" class="bg-shape absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-white/15 blur-[120px] mix-blend-screen"></div>
+            <div id="bg4" class="bg-shape absolute top-[40%] left-[40%] w-[30vw] h-[30vw] rounded-full bg-gray-300/10 blur-[80px] mix-blend-screen"></div>
+        </div>
+        
+        <!-- Glass Overlay -->
+        <div class="absolute inset-0 backdrop-blur-[50px] bg-black/20 z-0"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6 md:px-16 flex items-center justify-between">
+            <a href="#home" class="font-poppins font-bold text-2xl tracking-wide text-white">OM<span class="text-white">.</span></a>
+            
+            <!-- Desktop Nav -->
+            <ul class="hidden md:flex items-center gap-10">
+                <li><a href="#about" class="text-gray-400 hover:text-white text-sm font-medium tracking-widest uppercase transition-colors">About</a></li>
+                <li><a href="#projects" class="text-gray-400 hover:text-white text-sm font-medium tracking-widest uppercase transition-colors">Projects</a></li>
+                <li><a href="#contact" class="text-gray-400 hover:text-white text-sm font-medium tracking-widest uppercase transition-colors">Contact</a></li>
+            </ul>
+            
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-30 flex flex-col items-center justify-center gap-8 transition-transform duration-500 translate-x-full">
+        <a href="#about" class="mobile-link font-poppins text-3xl font-semibold tracking-widest uppercase text-white hover:text-gray-300 transition-colors">About</a>
+        <a href="#projects" class="mobile-link font-poppins text-3xl font-semibold tracking-widest uppercase text-white hover:text-gray-300 transition-colors">Projects</a>
+        <a href="#contact" class="mobile-link font-poppins text-3xl font-semibold tracking-widest uppercase text-white hover:text-gray-300 transition-colors">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden z-10">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+        
+        <div class="reveal">
+            <h1 class="font-poppins text-5xl md:text-[8rem] font-black leading-none mb-10 bg-gradient-to-b from-white via-gray-400 to-transparent bg-clip-text text-transparent text-3d">
+                Om Akhatkar<span class="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] text-3d-inner">.</span>
+            </h1>
+        </div>
+
+        <div class="reveal flex flex-col sm:flex-row gap-5 relative z-10 w-full sm:w-auto" style="transition-delay: 200ms;">
+            <a href="#projects" class="px-10 py-4 bg-white/20 backdrop-blur-md text-white border border-white/30 rounded-full text-sm font-semibold tracking-widest uppercase hover:bg-white hover:text-black hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all text-center">
+                VIEW PROJECTS
+            </a>
+            <a href="mailto:omakhatkar10@gmail.com" class="px-10 py-4 bg-transparent text-white border-2 border-white/50 rounded-full text-sm font-semibold tracking-widest uppercase hover:bg-white hover:text-black hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all text-center">
+                GET IN TOUCH
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 md:px-16 max-w-7xl mx-auto relative z-10">
+        <h2 class="reveal font-poppins text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+            About Me<span class="text-white">.</span>
+        </h2>
+
+        <div class="grid md:grid-cols-[1fr_1.5fr] gap-12 md:gap-16 items-center">
+            <!-- 3D User Icon Card -->
+            <div class="reveal tilt-card w-full aspect-square bg-white/5 backdrop-blur-lg rounded-3xl border border-white/10 flex items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/10 opacity-30 group-hover:opacity-100 transition-opacity duration-500" style="transform: translateZ(-10px)"></div>
+                <i data-lucide="user" class="text-white/80 w-20 h-20 relative z-10 tilt-content"></i>
+            </div>
+
+            <!-- Glassmorphism Info Card -->
+            <div class="reveal bg-white/5 backdrop-blur-2xl border border-white/10 p-8 md:p-10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                
+                <h3 class="font-poppins text-3xl text-white mb-6 font-semibold tracking-wide">Entrepreneur & Digital Creator</h3>
+                
+                <div class="space-y-4 text-gray-300 leading-relaxed text-lg mb-8 relative z-10">
+                    <p>Hi, I'm <strong class="text-white font-medium">Om Akhatkar</strong>, an Entrepreneur and Developer based in Amravati, Maharashtra. I specialize in building premium digital solutions that make a real-world impact, combining clean code with innovative, strategic design thinking.</p>
+                    <p>My journey is driven by a passion for solving complex problems and turning visionary ideas into reality. I focus on crafting seamless user experiences, robust backend architectures, and bold visual identities that elevate brands to the next level.</p>
+                    <p>Whether it's developing intelligent AI chatbots, scalable e-commerce platforms, or custom branding solutions, I believe in showcasing your story through precision, creativity, and cutting-edge technology.</p>
+                </div>
+
+                <div class="flex flex-wrap gap-4 mb-10 relative z-10">
+                    <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10 text-sm shadow-inner">
+                        <strong class="text-white">Location:</strong> <span class="text-gray-300">Amravati, MH</span>
+                    </div>
+                    <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10 text-sm shadow-inner">
+                        <strong class="text-white">Role:</strong> <span class="text-gray-300">Entrepreneur & Creator</span>
+                    </div>
+                    <div class="bg-black/40 backdrop-blur-md px-6 py-3 rounded-xl border border-white/10 text-sm shadow-inner">
+                        <strong class="text-white">Status:</strong> <span class="text-gray-300">Available for work</span>
+                    </div>
+                </div>
+
+                <h4 class="text-xl font-semibold text-white mb-5 tracking-wide relative z-10">Skills & Technologies</h4>
+                <div class="flex flex-wrap gap-3 relative z-10" id="skills-container">
+                    <!-- Skills injected via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 px-6 md:px-16 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="reveal font-poppins text-4xl md:text-5xl font-bold text-center mb-16 text-white">
+                Projects<span class="text-white">.</span>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+                <!-- Projects injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-16 max-w-5xl mx-auto text-center relative z-10">
+        <h2 class="reveal font-poppins text-4xl md:text-5xl font-bold mb-4 text-white">
+            Get In Touch<span class="text-white">.</span>
+        </h2>
+        <p class="reveal text-gray-400 text-lg mb-16">
+            Feel free to reach out for collaborations or just a friendly hello!
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-16 max-w-2xl mx-auto">
+            <div class="reveal tilt-card bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-white/30 transition-all h-full flex flex-col items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="tilt-content"><i data-lucide="mail" class="text-white mb-4 w-8 h-8"></i></div>
+                <h4 class="font-poppins font-semibold mb-2 text-white tilt-content">Email</h4>
+                <p class="text-gray-400 text-sm tilt-content">omakhatkar10@gmail.com</p>
+            </div>
+            <div class="reveal tilt-card bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:border-white/30 transition-all h-full flex flex-col items-center justify-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="tilt-content"><i data-lucide="map-pin" class="text-white mb-4 w-8 h-8"></i></div>
+                <h4 class="font-poppins font-semibold mb-2 text-white tilt-content">Location</h4>
+                <p class="text-gray-400 text-sm tilt-content">Amravati, Maharashtra, India</p>
+            </div>
+        </div>
+
+        <div class="reveal flex flex-wrap justify-center gap-4" id="socials-container">
+            <!-- Socials injected via JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 md:px-16 border-t border-white/30 flex flex-col md:flex-row items-center justify-between gap-4 text-sm relative z-10">
+        <div class="font-poppins font-bold text-lg text-white">OM<span class="text-white">.</span></div>
+        <p class="text-gray-500">© 2025 Om Akhatkar. All rights reserved.</p>
+        <p class="text-gray-500">Made with <span class="text-red-500">❤️</span> from Amravati</p>
+    </footer>
+
+    <!-- Chatbot Toggle Button -->
+    <button id="chat-toggle" class="fixed bottom-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-110 transition-transform z-50 text-black">
+        <i data-lucide="message-circle" id="chat-icon-open"></i>
+        <i data-lucide="x" id="chat-icon-close" class="hidden"></i>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div id="chat-window" class="fixed bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-96 h-[500px] max-h-[70vh] bg-[#111111] border border-white/30 rounded-2xl flex-col overflow-hidden z-50 shadow-2xl hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white/10 p-4 border-b border-white/20 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black">
+                <i data-lucide="bot" class="w-4 h-4"></i>
+            </div>
+            <div>
+                <h3 class="font-poppins font-semibold text-sm text-white">Om's AI Assistant</h3>
+                <p class="text-xs text-gray-400">Ask me anything about Om</p>
+            </div>
+        </div>
+        
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
+            <div class="flex flex-col items-start">
+                <div class="max-w-[85%] p-3 rounded-2xl text-sm bg-[#222] text-gray-200 rounded-tl-sm">
+                    <div class="whitespace-pre-wrap">Hi! I'm Om's AI assistant. How can I help you today?</div>
+                </div>
+            </div>
+        </div>
+        
+        <form id="chat-form" class="p-3 border-t border-white/20 bg-black/50 flex gap-2">
+            <input type="text" id="chat-input" placeholder="Type a message..." class="flex-1 bg-[#222] text-white text-sm rounded-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-white">
+            <button type="submit" id="chat-submit" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black disabled:opacity-50 disabled:cursor-not-allowed shrink-0">
+                <i data-lucide="send" class="w-4 h-4 ml-1"></i>
+            </button>
+        </form>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 2. Data Arrays
+        const skills = ["HTML5", "CSS3", "JavaScript", "Python", "React", "Node.js", "AI / ML", "Git & GitHub", "Entrepreneurship", "Problem Solving"];
+        const projects = [
+            { title: "Personal Portfolio Website", desc: "My personal portfolio built with modern web technologies", icon: "globe" },
+            { title: "AI Chat Application", desc: "An intelligent chatbot powered by machine learning", icon: "bot" },
+            { title: "E-Commerce Platform", desc: "Full-stack online shopping platform", icon: "shopping-cart" },
+            { title: "Blog Platform", desc: "Dynamic blog with CMS built from scratch", icon: "book-open", link: "https://omakhatkar.blogspot.com" },
+            { title: "Task Management App", desc: "Productivity app for managing daily tasks", icon: "check-square" },
+            { title: "Weather Dashboard", desc: "Real-time weather tracking application", icon: "cloud-sun" },
+        ];
+        const socials = [
+            { icon: "instagram", href: "https://instagram.com/mr.om_akhatkar" },
+            { icon: "github", href: "https://github.com/omakhatkar" },
+            { icon: "linkedin", href: "https://linkedin.com/in/omakhatkar" },
+            { icon: "twitter", href: "https://twitter.com/omakhatkar" },
+            { icon: "book-open", href: "https://omakhatkar.blogspot.com" },
+            { icon: "link", href: "https://linktr.ee/omakhatkar" },
+        ];
+
+        // 3. Inject Data into DOM
+        const skillsContainer = document.getElementById('skills-container');
+        skills.forEach(skill => {
+            const span = document.createElement('span');
+            span.className = "px-5 py-2.5 bg-white/5 border border-white/20 rounded-full text-sm text-gray-200 font-medium hover:bg-white hover:text-black hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all cursor-default";
+            span.textContent = skill;
+            skillsContainer.appendChild(span);
+        });
+
+        const projectsContainer = document.getElementById('projects-container');
+        projects.forEach((project, i) => {
+            const div = document.createElement('div');
+            div.className = "reveal tilt-card";
+            div.style.transitionDelay = `${i * 100}ms`;
+            div.innerHTML = `
+                <div class="bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 hover:shadow-[0_20px_60px_rgba(255,255,255,0.1)] transition-all duration-300 group h-full flex flex-col relative">
+                    <div class="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                    <div class="w-full h-48 bg-white/5 flex items-center justify-center group-hover:scale-105 transition-transform duration-500" style="transform-style: preserve-3d">
+                        <div style="transform: translateZ(30px)" class="text-white/70">
+                            <i data-lucide="${project.icon}" class="w-12 h-12"></i>
+                        </div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col" style="transform-style: preserve-3d">
+                        <h3 class="font-poppins text-lg font-semibold mb-3 text-white" style="transform: translateZ(20px)">${project.title}</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-1" style="transform: translateZ(10px)">${project.desc}</p>
+                        <a href="${project.link || '#'}" target="${project.link ? '_blank' : '_self'}" class="text-white text-sm font-semibold hover:tracking-wide transition-all inline-flex items-center gap-2" style="transform: translateZ(20px)">
+                            View Project <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            projectsContainer.appendChild(div);
+        });
+
+        const socialsContainer = document.getElementById('socials-container');
+        socials.forEach(social => {
+            const a = document.createElement('a');
+            a.href = social.href;
+            a.target = "_blank";
+            a.className = "w-14 h-14 bg-[#111] border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white hover:border-white hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,255,255,0.3)] hover:text-black transition-all";
+            a.innerHTML = `<i data-lucide="${social.icon}"></i>`;
+            socialsContainer.appendChild(a);
+        });
+
+        // Re-initialize icons for newly injected HTML
+        lucide.createIcons();
+
+        // 4. Liquid Background Animation (Mouse Move)
+        const bg1 = document.getElementById('bg1');
+        const bg2 = document.getElementById('bg2');
+        const bg3 = document.getElementById('bg3');
+        const bg4 = document.getElementById('bg4');
+
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 40 - 20;
+            const y = (e.clientY / window.innerHeight) * 40 - 20;
+
+            bg1.style.transform = `translate(${x * 2}px, ${y * 2}px)`;
+            bg2.style.transform = `translate(${x * -3}px, ${y * -3}px)`;
+            bg3.style.transform = `translate(${x * 1.5}px, ${y * 1.5}px)`;
+            bg4.style.transform = `translate(${x * -1}px, ${y * -1}px)`;
+        });
+
+        // 5. Scroll Animations (Navbar & Reveal)
+        const navbar = document.getElementById('navbar');
+        const reveals = document.querySelectorAll('.reveal');
+
+        const handleScroll = () => {
+            // Navbar
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/40', 'backdrop-blur-xl', 'border-b', 'border-white/10');
+                navbar.classList.remove('py-6', 'bg-transparent');
+                navbar.classList.add('py-4');
+            } else {
+                navbar.classList.remove('bg-black/40', 'backdrop-blur-xl', 'border-b', 'border-white/10', 'py-4');
+                navbar.classList.add('py-6', 'bg-transparent');
+            }
+
+            // Reveal Elements
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Trigger once on load
+
+        // 6. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        const toggleMenu = () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                mobileMenuBtn.innerHTML = '<i data-lucide="x"></i>';
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenuBtn.innerHTML = '<i data-lucide="menu"></i>';
+            }
+            lucide.createIcons();
+        };
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // 7. 3D Tilt Effect
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -15;
+                const rotateY = ((x - centerX) / centerX) * 15;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+        // 8. Chatbot Logic (Simulated)
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const chatIconOpen = document.getElementById('chat-icon-open');
+        const chatIconClose = document.getElementById('chat-icon-close');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatSubmit = document.getElementById('chat-submit');
+        
+        let isChatOpen = false;
+
+        chatToggle.addEventListener('click', () => {
+            isChatOpen = !isChatOpen;
+            if (isChatOpen) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => chatWindow.classList.remove('opacity-0'), 10);
+                chatIconOpen.classList.add('hidden');
+                chatIconClose.classList.remove('hidden');
+            } else {
+                chatWindow.classList.add('opacity-0');
+                setTimeout(() => chatWindow.classList.add('hidden'), 300);
+                chatIconOpen.classList.remove('hidden');
+                chatIconClose.classList.add('hidden');
+            }
+        });
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add User Message
+            const userDiv = document.createElement('div');
+            userDiv.className = "flex flex-col items-end";
+            userDiv.innerHTML = `
+                <div class="max-w-[85%] p-3 rounded-2xl text-sm bg-white text-black rounded-tr-sm">
+                    <div class="whitespace-pre-wrap">${message}</div>
+                </div>
+            `;
+            chatMessages.appendChild(userDiv);
+            
+            // Clear input and scroll
+            chatInput.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Disable input while "thinking"
+            chatInput.disabled = true;
+            chatSubmit.disabled = true;
+
+            // Simulate AI Response
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = "flex flex-col items-start";
+                
+                // Simple simulated responses based on keywords
+                let response = "Thanks for reaching out! Since this is a static HTML version of the portfolio, I'm currently running in offline mode. You can contact Om directly at omakhatkar10@gmail.com.";
+                
+                const lowerMsg = message.toLowerCase();
+                if(lowerMsg.includes("hi") || lowerMsg.includes("hello")) {
+                    response = "Hello! I'm Om's AI assistant. How can I help you learn more about his work?";
+                } else if(lowerMsg.includes("skill") || lowerMsg.includes("tech")) {
+                    response = "Om specializes in HTML5, CSS3, JavaScript, Python, React, Node.js, and AI/ML.";
+                } else if(lowerMsg.includes("contact") || lowerMsg.includes("email")) {
+                    response = "You can reach Om directly at omakhatkar10@gmail.com.";
+                } else if(lowerMsg.includes("project")) {
+                    response = "Om has built several projects including an AI Chat Application, an E-Commerce Platform, and a dynamic Blog Platform.";
+                }
+
+                aiDiv.innerHTML = `
+                    <div class="max-w-[85%] p-3 rounded-2xl text-sm bg-[#222] text-gray-200 rounded-tl-sm">
+                        <div class="whitespace-pre-wrap">${response}</div>
+                    </div>
+                `;
+                chatMessages.appendChild(aiDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Re-enable input
+                chatInput.disabled = false;
+                chatSubmit.disabled = false;
+                chatInput.focus();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
